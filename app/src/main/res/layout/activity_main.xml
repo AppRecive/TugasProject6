@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/colorBest1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="20dp"
+        android:padding="20dp">
+
+
+        <ImageView
+            android:id="@+id/img_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="0dp"
+            android:src="@drawable/cook" />
+
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txtMenuMskn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="SELAMAT DATANG"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="5sp"
+        android:textColor="@color/colorBest2"/>
+
+    <Button
+        android:id="@+id/btnMenuResp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Menu Resep khas jakarta"
+        android:textColor="@color/colorBest2"
+        android:background="@drawable/garis"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"/>
+    <Button
+        android:id="@+id/btnForum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="Forum Diskusi Komunitas"
+        android:textColor="@color/colorBest2"
+        android:background="@drawable/garis"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/btn_Prfle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:background="@drawable/garis"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:text="About Me"
+        android:textColor="@color/colorBest2"/>
+
+</LinearLayout>

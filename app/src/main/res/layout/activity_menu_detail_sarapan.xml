@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuDetailSarapan"
+    android:background="@color/colorBest1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_menu"
+            android:layout_width="347dp"
+            android:layout_height="200dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/garis"
+            android:src="@drawable/nasiuduklemak" />
+
+        <TextView
+            android:id="@+id/txtSrpn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nasi Uduk Sederhana"
+            android:textColor="@color/colorBest2"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:padding="5dp"/>
+        <TextView
+            android:id="@+id/txtSrpn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bahan-Bahan"
+            android:textColor="@color/colorBest2"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txtSrpn3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:textSize="15sp"
+            android:text="-300 gram Beras, Cuci Hingga Bersih.\n-450 ml Santan Kelapa kental.\n-2 Lembar Daun Salam.\n-2 Butir Cengkeh.\n-2 Batang serai, Memarkan.\n-2 cm Kayu Manis.\n-1/2 Sendok Merica.\n-Garam Secukupnya."/>
+    <TextView
+        android:id="@+id/txtSrpn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cara Membuat"
+        android:textColor="@color/colorBest2"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/txtSrpn5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textSize="15sp"
+        android:text="-Rebus santan dan masukkan daun salam, cengkeh, serai, kayu manis, merica, dan garam.\n-Aduk hingga mendidih.\n-Campurkan santan dan beras.\nKukus hingga beras matang atau jadi nasi.\n-Dan Nasi uduk siap disajikan"/>
+
+        <TextView
+            android:id="@+id/txtSrpn6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selamat Mencoba!"
+            android:textColor="@color/colorBest2"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:padding="5dp"/>
+    </LinearLayout>
+</ScrollView>

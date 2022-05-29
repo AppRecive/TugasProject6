@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MenuDetailMasakan"
+    android:background="@color/colorBest1"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="180dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/gadogado" />
+
+        <TextView
+        android:id="@+id/txtMskn1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gado-Gado"
+        android:textColor="@color/colorBest2"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"/>
+    <TextView
+        android:id="@+id/txtMskn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bahan-Bahan"
+        android:textColor="@color/colorBest2"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/txtMskn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textSize="15sp"
+        android:text="-kangkung.\n-kacang panjang.\n-daun pisang.\n-kol, iris.\n-labu siam, potong.\n-Toge.\n-jagung manis, rebus, serut.\n-tempe, potong tebal.\n-tahu.\n-Bumbu kacang:\n-Cabai rawit (sesuai selera).\n-1 sdt garam.\n-Gula merah.\n-2 sdm kacang goreng giling.\n-1 jeruk limau, peras airnya."/>
+
+    <TextView
+        android:id="@+id/txtMskn4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cara Membuat"
+        android:textColor="@color/colorBest2"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/txtMskn5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:textSize="15sp"
+        android:text="Rebus semua sayuran, angkat, tiriskan.\n-Goreng tempe dan tahu sampai kecoklatan.\n-Ulek semua bahan bumbu kacang sampai halus, cek rasa. Lalu kucuri jeruk limau.\n-Tambahkan sayur-sayuran, tempe tahu. Lalu aduk dan campurkan jadi satu dengan bumbu kacang.\n-Tata gado-gado pada piring, tambahkan telur rebus dan kerupuk."/>
+
+        <TextView
+        android:id="@+id/txtMskn6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Selamat Mencoba!"
+        android:textColor="@color/colorBest2"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:padding="5dp"/>
+
+    </LinearLayout>
+</ScrollView>
