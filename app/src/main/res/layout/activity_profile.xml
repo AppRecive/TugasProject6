@@ -7,6 +7,13 @@
     android:orientation="vertical"
     android:background="@color/colorBest1"
     tools:context=".Profile">
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/colorPrimary"
+        app:titleTextColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="List Menu"
+        android:id="@+id/toolbar_profile" />
 
     <TextView
         android:id="@+id/txtPrfl"

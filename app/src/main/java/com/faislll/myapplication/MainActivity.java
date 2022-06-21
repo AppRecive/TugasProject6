@@ -1,61 +1,43 @@
 package com.faislll.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-//import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-    private Button btnMenu1, btnMenu2, btnMenu3, btnProfile;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        btnMenu1 = findViewById(R.id.btn_menuSarapan);
-        btnMenu2 = findViewById(R.id.btn_MenuUtama);
-        btnMenu3 = findViewById(R.id.btn_Menukue);
-        btnProfile = findViewById(R.id.btn_Prfle);
+        if(user == null){
+            Intent goToLoginPage = new Intent(MainActivity.this, Login.class);
+            startActivity(goToLoginPage);
+            this.finish();
+        }
 
+        Button buttonMenuResep = findViewById(R.id.btnMenuResp);
+        Button btnProfile = findViewById(R.id.btn_Prfle);
+        Button btnLogout = findViewById(R.id.btn_logout);
 
-        btnMenu1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent klikMenu1 = new Intent( MainActivity.this,MenuSarapan.class);
-                startActivity(klikMenu1);
-
-            }
+        btnLogout.setOnClickListener(view -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(MainActivity.this, Login.class));
+            finish();
         });
 
-        btnMenu2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent klikMenu2 = new Intent( MainActivity.this,MenuMasakan.class);
-                startActivity(klikMenu2);
+        buttonMenuResep.setOnClickListener(view -> startActivity(new Intent(MainActivity.this, Menu.class)));
 
-            }
-        });
+        btnProfile.setOnClickListener(view -> {
+            Intent klikMenu4 = new Intent( MainActivity.this,Profile.class);
+            startActivity(klikMenu4);
 
-        btnMenu3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent klikMenu3 = new Intent( MainActivity.this,MenuKue.class);
-                startActivity(klikMenu3);
-
-            }
-        });
-
-        btnProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent klikMenu4 = new Intent( MainActivity.this,Profile.class);
-                startActivity(klikMenu4);
-
-            }
         });
     }
 }

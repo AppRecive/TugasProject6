@@ -1,40 +1,31 @@
 package com.faislll.myapplication;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import java.util.Objects;
 
 public class Profile extends AppCompatActivity {
 
-    TextView txtPrfl;
-    ImageView imgPrfl;
-
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        Toolbar toolbar = findViewById(R.id.toolbar_profile);
 
-        class MyFragment extends Fragment {
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-            @Override
-            public void onCreate(@Nullable Bundle savedInstanceState) {
-                super.onCreate(savedInstanceState);
-
-                // This callback will only be called when MyFragment is at least Started.
-                OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
-                    @Override
-                    public void handleOnBackPressed() {
-                        // Handle the back button event
-                    }
-                };
-                requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
-            }
-        }
+        ActionBar actionBar = getSupportActionBar();
+        toolbar.setTitle("My Profile");
+        assert actionBar != null;
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24));
+        toolbar.setNavigationOnClickListener(v -> this.finish());
 
     }
 }

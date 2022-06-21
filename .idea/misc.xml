@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/bg_card.xml" value="0.2125" />
+        <entry key="app/src/main/res/drawable/bg_red.xml" value="0.2125" />
+        <entry key="app/src/main/res/drawable/bg_rounded.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.3260416666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_open_in_new_24_black.xml" value="0.2125" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.15489130434782608" />
+        <entry key="app/src/main/res/layout/activity_menu.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/activity_menu_detail_kue.xml" value="0.16822916666666668" />
+        <entry key="app/src/main/res/layout/activity_menu_detail_masakan.xml" value="0.2693911592994162" />
+        <entry key="app/src/main/res/layout/activity_menu_detail_sarapan.xml" value="0.16822916666666668" />
+        <entry key="app/src/main/res/layout/activity_menu_masakan.xml" value="0.16770833333333332" />
+        <entry key="app/src/main/res/layout/activity_new_menu.xml" value="0.19249478804725503" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.18885869565217392" />
+        <entry key="app/src/main/res/layout/detail_menu.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/list_menu.xml" value="0.335" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

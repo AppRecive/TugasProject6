@@ -38,6 +38,9 @@
         android:layout_marginTop="10dp"
         android:padding="5sp"
         android:textColor="@color/colorBest2"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <Button
         android:id="@+id/btnMenuResp"
@@ -51,21 +54,10 @@
         android:layout_marginTop="20dp"
         android:padding="5dp"
         android:layout_gravity="center_horizontal"/>
-    <Button
-        android:id="@+id/btnForum"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="Forum Diskusi Komunitas"
-        android:textColor="@color/colorBest2"
-        android:background="@drawable/garis"
-        android:textSize="20sp"
-        android:layout_marginTop="20dp"
-        android:padding="5dp"
-        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/btn_Prfle"
+        android:layout_below="@+id/btnMenuResp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -76,5 +68,23 @@
         android:padding="5dp"
         android:text="About Me"
         android:textColor="@color/colorBest2"/>
+
+    <Button
+        android:layout_below="@id/btn_Prfle"
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:background="@drawable/garis"
+        android:gravity="center_horizontal"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:padding="5dp"
+        android:text="Logout"
+        android:textColor="@color/colorBest2"/>
+
+    </RelativeLayout>
+
+
 
 </LinearLayout>

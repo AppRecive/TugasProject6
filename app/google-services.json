@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "443647782043",
+    "project_id": "app-recive",
+    "storage_bucket": "app-recive.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:443647782043:android:335835553fe56239566a3e",
+        "android_client_info": {
+          "package_name": "com.faislll.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "443647782043-ki42dnu53cr06umpkmd0euluhhha95e9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.faislll.myapplication",
+            "certificate_hash": "8b845ac6667c15c5f05be13d41ca52dfe6f7055a"
+          }
+        },
+        {
+          "client_id": "443647782043-oprtbbhndr8e68vsbd3v6ks7fi2lgqf9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx3iFmugg1oSD6E-t9Ppwri6DhP4ds__k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "443647782043-oprtbbhndr8e68vsbd3v6ks7fi2lgqf9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

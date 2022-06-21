@@ -1,6 +1,7 @@
 package com.faislll.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Button;
 
 public class MenuMasakan extends AppCompatActivity {
     private Button btnGado, btnSoto, btnSate;
+    private Toolbar topToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,14 +18,13 @@ public class MenuMasakan extends AppCompatActivity {
         setContentView(R.layout.activity_menu_masakan);
 
         btnGado = findViewById(R.id.btnmsk_Gado);
+        topToolbar = findViewById(R.id.toolbar_top);
 
-        btnSate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent klikMenu1 = new Intent( MenuMasakan.this,MenuDetailSarapan.class);
-                startActivity(klikMenu1);
+        topToolbar.setTitle("Menu Masakan");
 
-            }
+        btnGado.setOnClickListener(view -> {
+            Intent klikMenu1 = new Intent( MenuMasakan.this,MenuDetailSarapan.class);
+            startActivity(klikMenu1);
         });
     }
 }

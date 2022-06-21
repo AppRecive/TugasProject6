@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NewMenu">
+
+    <LinearLayout
+        android:id="@+id/ll_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.Toolbar
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Tambah Resep"
+            android:id="@+id/toolbar_resep_baru" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/ic_baseline_image_search_24"
+                android:id="@+id/preview_image"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"/>
+
+            <ImageButton
+                android:id="@+id/add_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/preview_image"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/bg_rounded"
+                android:src="@drawable/ic_baseline_image_search_24" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nama Menu"/>
+            <EditText
+                android:id="@+id/et_nama_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Menu" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginVertical="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bahan"/>
+            <EditText
+                android:inputType="textMultiLine"
+                android:id="@+id/et_bahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Bahan - bahan" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginVertical="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cara Memasak"/>
+            <EditText
+                android:inputType="textMultiLine"
+                android:id="@+id/et_cara_memasak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cara Memasak" />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_marginVertical="10dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Deskripsi (Opsional)"/>
+                <EditText
+                    android:inputType="textMultiLine"
+                    android:id="@+id/et_deskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Deskripsi" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:id="@+id/buttonSimpan"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/ll_parent"
+        app:layout_constraintRight_toRightOf="@id/ll_parent"
+        android:src="@drawable/ic_baseline_save_24"
+        android:layout_height="wrap_content" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
