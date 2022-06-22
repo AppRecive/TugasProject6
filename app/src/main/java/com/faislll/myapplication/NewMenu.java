@@ -28,6 +28,10 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.faislll.myapplication.adapter.MenuAdapter;
 import com.faislll.myapplication.model.Reseps;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -38,6 +42,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,13 +51,15 @@ public class NewMenu extends AppCompatActivity {
     private static final String TAG = "New Menu ____: ";
     private ImageView imagePreview;
     private Uri uriImage;
-    private boolean isEmpty = true;
+    private boolean isEmpty;
     private EditText editTextNamaMenu, editTextBahan, editTextCaraMemasak, editTextDeskripsi;
     private String urlImage;
+    private String newImageName;
     private StorageReference resepsReferencesImage;
 
 
     private static final int STORAGE_PERMISSION_CODE = 101;
+    private UploadTask uploadTask;
 
     @SuppressLint("UseCompatLoadingForDrawables")
     @Override
@@ -112,39 +120,20 @@ public class NewMenu extends AppCompatActivity {
 
         buttonSimpan.setOnClickListener(view -> {
             /*** start validate */
-            if (editTextBahan.getText().toString().equals("")){
-                editTextBahan.setError("field tidak boleh kosong!");
-                editTextBahan.requestFocus();
-            } else if(editTextCaraMemasak.getText().toString().equals("")){
-                editTextCaraMemasak.setError("field tidak boleh kosong!");
-                editTextCaraMemasak.requestFocus();
-            } else if(editTextNamaMenu.getText().toString().equals("")){
-                editTextNamaMenu.setError("field tidak boleh kosong!");
-                editTextNamaMenu.requestFocus();
-            } else {
+//            if (editTextBahan.getText().toString().equals("")){
+//                editTextBahan.setError("field tidak boleh kosong!");
+//                editTextBahan.requestFocus();
+//            } else if(editTextCaraMemasak.getText().toString().equals("")){
+//                editTextCaraMemasak.setError("field tidak boleh kosong!");
+//                editTextCaraMemasak.requestFocus();
+//            } else if(editTextNamaMenu.getText().toString().equals("")){
+//                editTextNamaMenu.setError("field tidak boleh kosong!");
+//                editTextNamaMenu.requestFocus();
+//            } else {
                     try {
 
                         imagePreview.setDrawingCacheEnabled(true);
                         imagePreview.buildDrawingCache();
-
-                        if (uriImage != null){
-                            Bitmap bitmap = ((BitmapDrawable) imagePreview.getDrawable()).getBitmap();
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
-                            byte[] dataImage = byteArrayOutputStream.toByteArray();
-
-                            StorageReference reference = storage.getReference();
-                            String newImageName = editTextNamaMenu.getText() + UUID.randomUUID().toString() + ".png";
-
-                            resepsReferencesImage = reference.child("reseps/" + newImageName);
-                            UploadTask uploadTask = resepsReferencesImage.putBytes(dataImage);
-
-                            uploadTask.addOnSuccessListener(taskSnapshot -> resepsReferencesImage.getDownloadUrl().addOnSuccessListener(uri -> urlImage = uri.toString())).addOnFailureListener(e -> {
-                                Toast.makeText(getApplicationContext(),"mesage: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                e.printStackTrace();
-                                this.finish();
-                            });
-                        }
 
                         FirebaseFirestore database = FirebaseFirestore.getInstance();
                         String idResep = UUID.randomUUID().toString();
@@ -164,37 +153,97 @@ public class NewMenu extends AppCompatActivity {
                                 deskripsi,
                                 user.getUid());
 
-                        if(actionStep.equals(MenuAdapter.ACTION_NEW)){
-                            if(!isEmpty){
-                                database.collection("reseps").document(idResep).set(resep).addOnSuccessListener(unused -> {
-                                    assert false;
-                                    Toast.makeText(getApplicationContext(), "Data save completed", Toast.LENGTH_SHORT).show();
+                        if (uriImage != null){
+                            Toast.makeText(getApplicationContext(), "uriImage != null", Toast.LENGTH_SHORT).show();
+                            Bitmap bitmap = ((BitmapDrawable) imagePreview.getDrawable()).getBitmap();
+                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
+                            byte[] dataImage = byteArrayOutputStream.toByteArray();
+
+                            StorageReference reference = storage.getReference();
+                            newImageName = editTextNamaMenu.getText().toString().replace(" ", "-")+ UUID.randomUUID().toString() + ".png";
+
+                            resepsReferencesImage = reference.child("reseps/" + newImageName);
+                            UploadTask uploadTask = resepsReferencesImage.putBytes(dataImage);
+
+                            uploadTask.addOnSuccessListener(taskSnapshot -> resepsReferencesImage.getDownloadUrl()
+                                    .addOnSuccessListener(uri -> {
+                                        if(actionStep.equals(MenuAdapter.ACTION_UPDATE)){
+                                            Map<String, Object> dataUpdated = new HashMap<>();
+
+                                            dataUpdated.put("cara_memasak", caraMemasak);
+                                            dataUpdated.put("bahan", bahan);
+                                            dataUpdated.put("deskripsi", deskripsi);
+                                            dataUpdated.put("nama_menu", namaMenu);
+
+                                            assert reseps != null;
+                                            dataUpdated.put("url_image", uri.toString());
+
+                                            database.collection("reseps").document(reseps.getId_resep())
+                                                    .update(dataUpdated).addOnCompleteListener(task -> {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(getApplicationContext(), "Success update data...", Toast.LENGTH_SHORT).show();
+                                                }
+                                                this.finish();
+                                            }).addOnFailureListener(e -> {
+                                                Toast.makeText(getApplicationContext(), "message:  " + e.getMessage() + " message!", Toast.LENGTH_SHORT).show();
+                                                this.finish();
+                                            });
+
+
+                                        } else {
+
+                                            if(isEmpty){
+                                                Toast.makeText(getApplicationContext(), "The image source is should'nt empty, please choose some image for continue the proses!", Toast.LENGTH_SHORT).show();
+                                                return;
+                                            }
+
+                                        resep.setUrl_image(uri.toString());
+                                        database.collection("reseps").document(idResep).set(resep)
+                                                .addOnCompleteListener(task -> {
+                                                    if(task.isSuccessful()){
+                                                        Toast.makeText(getApplicationContext(), "Data save completed", Toast.LENGTH_SHORT).show();
+                                                        this.finish();
+                                                    }
+                                                }).addOnFailureListener(e -> {
+                                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                });
+                                        }
+
+                                    })).addOnFailureListener(e -> {
+                                Toast.makeText(getApplicationContext(),"mesage: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                                this.finish();
+                            });
+                        } else {
+
+                            if(actionStep.equals(MenuAdapter.ACTION_UPDATE)) {
+                                Map<String, Object> dataUpdated = new HashMap<>();
+
+                                dataUpdated.put("cara_memasak", caraMemasak);
+                                dataUpdated.put("bahan", bahan);
+                                dataUpdated.put("deskripsi", deskripsi);
+                                dataUpdated.put("nama_menu", namaMenu);
+
+                                assert reseps != null;
+                                dataUpdated.put("url_image", reseps.getUrl_image());
+
+                                database.collection("reseps").document(reseps.getId_resep())
+                                        .update(dataUpdated).addOnCompleteListener(task -> {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(getApplicationContext(), "Success update data...", Toast.LENGTH_SHORT).show();
+                                    }
                                     this.finish();
                                 }).addOnFailureListener(e -> {
-                                    Toast.makeText(getApplicationContext(), "message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    e.printStackTrace();
+                                    Toast.makeText(getApplicationContext(), "message:  " + e.getMessage() + " message!", Toast.LENGTH_SHORT).show();
                                     this.finish();
                                 });
                             } else {
                                 Toast.makeText(getApplicationContext(), "The image source is should'nt empty, please choose some image for continue the proses!", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-                            assert reseps != null;
-                            if(isEmpty){
-                                resep.setUrl_image(reseps.getUrl_image());
-                            }
-                            resep.setId_resep(reseps.getId_resep());
-                            database.collection("reseps").document(reseps.getId_resep()).set(resep).addOnCompleteListener(task -> {
-                                if(task.isSuccessful()){
-                                    Toast.makeText(getApplicationContext(), "Success update data...", Toast.LENGTH_SHORT).show();
-                                }
-                                this.finish();
-                            }).addOnFailureListener(e -> {
-                                Toast.makeText(getApplicationContext(), "message:  " + e.getMessage() + " message!", Toast.LENGTH_SHORT).show();
-                                this.finish();
-                            });
 
+                            }
                         }
+
                     } catch (Exception error){
                         Toast.makeText(getApplicationContext(),"message: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                         error.printStackTrace();
@@ -202,7 +251,7 @@ public class NewMenu extends AppCompatActivity {
                     }
                 /*** end validate */
 
-            }
+//            }
         });
     }
 

@@ -9,6 +9,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.faislll.myapplication.adapter.MenuAdapter;
 import com.faislll.myapplication.model.Reseps;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -36,6 +39,7 @@ public class MenuDetailMasakan extends AppCompatActivity {
         ImageView imageViewMasakan = findViewById(R.id.img_menu);
         FloatingActionButton floatingActionButtonEdit = findViewById(R.id.edit_menu);
         FloatingActionButton floatingActionButtonDelete = findViewById(R.id.hapus);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
         Toolbar toolbar = findViewById(R.id.toolbar_detail_masakan);
@@ -46,7 +50,6 @@ public class MenuDetailMasakan extends AppCompatActivity {
         assert actionBar != null;
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24));
         toolbar.setNavigationOnClickListener(v -> this.finish());
-
 
         Intent getExtraData = getIntent();
         Reseps resep = (Reseps) getExtraData.getSerializableExtra(MenuAdapter.RESEPS_DATA);
@@ -65,11 +68,15 @@ public class MenuDetailMasakan extends AppCompatActivity {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         DocumentReference path = database.collection("reseps").document(resep.getId_resep());
 
+        if(!user.getUid().equals(resep.getAuthorID())){
+            floatingActionButtonEdit.setVisibility(View.GONE);
+            floatingActionButtonDelete.setVisibility(View.GONE);
+        }
+
         floatingActionButtonEdit.setOnClickListener(v -> {
             Intent intentResep = new Intent(MenuDetailMasakan.this, NewMenu.class);
             intentResep.putExtra(MenuAdapter.RESEPS_DATA, resep);
             intentResep.putExtra(MenuAdapter.ACTION_STATE, MenuAdapter.ACTION_UPDATE);
-
             startActivity(intentResep);
         });
 
