@@ -3,28 +3,19 @@ package com.faislll.myapplication.model;
 import java.io.Serializable;
 
 public class Reseps implements Serializable {
-    private String id_resep, nama_menu, author, cara_memasak, bahan, url_image, deskripsi, authorID;
+    private String id_resep, nama_menu, cara_memasak, bahan, url_image, deskripsi, id_user;
 
     public Reseps() {
     }
 
-    public Reseps(String id_resep, String nama_menu, String author, String cara_memasak, String bahan, String url_image, String deskripsi, String authorID) {
+    public Reseps(String id_resep, String nama_menu, String cara_memasak, String bahan, String url_image, String deskripsi, String id_user) {
         this.id_resep = id_resep;
         this.nama_menu = nama_menu;
-        this.author = author;
         this.cara_memasak = cara_memasak;
         this.bahan = bahan;
         this.url_image = url_image;
         this.deskripsi = deskripsi;
-        this.authorID = authorID;
-    }
-
-    public String getAuthorID() {
-        return authorID;
-    }
-
-    public void setAuthorID(String authorID) {
-        this.authorID = authorID;
+        this.id_user = id_user;
     }
 
     public String getId_resep() {
@@ -41,14 +32,6 @@ public class Reseps implements Serializable {
 
     public void setNama_menu(String nama_menu) {
         this.nama_menu = nama_menu;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
     }
 
     public String getCara_memasak() {
@@ -81,5 +64,13 @@ public class Reseps implements Serializable {
 
     public void setDeskripsi(String deskripsi) {
         this.deskripsi = deskripsi;
+    }
+
+    public String getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(String id_user) {
+        this.id_user = id_user;
     }
 }

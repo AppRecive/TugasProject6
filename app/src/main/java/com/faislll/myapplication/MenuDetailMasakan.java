@@ -68,7 +68,7 @@ public class MenuDetailMasakan extends AppCompatActivity {
         FirebaseFirestore database = FirebaseFirestore.getInstance();
         DocumentReference path = database.collection("reseps").document(resep.getId_resep());
 
-        if(!user.getUid().equals(resep.getAuthorID())){
+        if(!user.getUid().equals(resep.getId_user())){
             floatingActionButtonEdit.setVisibility(View.GONE);
             floatingActionButtonDelete.setVisibility(View.GONE);
         }

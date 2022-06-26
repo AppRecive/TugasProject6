@@ -22,16 +22,14 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
 import com.faislll.myapplication.adapter.MenuAdapter;
 import com.faislll.myapplication.model.Reseps;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.faislll.myapplication.model.Users;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -68,6 +66,7 @@ public class NewMenu extends AppCompatActivity {
         setContentView(R.layout.activity_new_menu);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         if(user == null){
             Intent gotoLogin = new Intent(NewMenu.this, Login.class);
             startActivity(gotoLogin);
@@ -120,16 +119,16 @@ public class NewMenu extends AppCompatActivity {
 
         buttonSimpan.setOnClickListener(view -> {
             /*** start validate */
-//            if (editTextBahan.getText().toString().equals("")){
-//                editTextBahan.setError("field tidak boleh kosong!");
-//                editTextBahan.requestFocus();
-//            } else if(editTextCaraMemasak.getText().toString().equals("")){
-//                editTextCaraMemasak.setError("field tidak boleh kosong!");
-//                editTextCaraMemasak.requestFocus();
-//            } else if(editTextNamaMenu.getText().toString().equals("")){
-//                editTextNamaMenu.setError("field tidak boleh kosong!");
-//                editTextNamaMenu.requestFocus();
-//            } else {
+            if (editTextBahan.getText().toString().equals("")){
+                editTextBahan.setError("field tidak boleh kosong!");
+                editTextBahan.requestFocus();
+            } else if(editTextCaraMemasak.getText().toString().equals("")){
+                editTextCaraMemasak.setError("field tidak boleh kosong!");
+                editTextCaraMemasak.requestFocus();
+            } else if(editTextNamaMenu.getText().toString().equals("")){
+                editTextNamaMenu.setError("field tidak boleh kosong!");
+                editTextNamaMenu.requestFocus();
+            } else {
                     try {
 
                         imagePreview.setDrawingCacheEnabled(true);
@@ -142,11 +141,9 @@ public class NewMenu extends AppCompatActivity {
                         String bahan = editTextBahan.getText().toString();
                         String deskripsi = editTextDeskripsi.getText().toString();
 
-                        assert user != null;
                         Reseps resep = new Reseps(
                                 idResep,
                                 namaMenu,
-                                user.getDisplayName(),
                                 caraMemasak,
                                 bahan,
                                 urlImage,
@@ -154,7 +151,6 @@ public class NewMenu extends AppCompatActivity {
                                 user.getUid());
 
                         if (uriImage != null){
-                            Toast.makeText(getApplicationContext(), "uriImage != null", Toast.LENGTH_SHORT).show();
                             Bitmap bitmap = ((BitmapDrawable) imagePreview.getDrawable()).getBitmap();
                             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                             bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
@@ -189,20 +185,23 @@ public class NewMenu extends AppCompatActivity {
                                                 Toast.makeText(getApplicationContext(), "message:  " + e.getMessage() + " message!", Toast.LENGTH_SHORT).show();
                                                 this.finish();
                                             });
-
-
                                         } else {
-
                                             if(isEmpty){
                                                 Toast.makeText(getApplicationContext(), "The image source is should'nt empty, please choose some image for continue the proses!", Toast.LENGTH_SHORT).show();
                                                 return;
                                             }
 
                                         resep.setUrl_image(uri.toString());
-                                        database.collection("reseps").document(idResep).set(resep)
+                                        Users currentUser = new Users(user.getUid(),user.getEmail(), user.getDisplayName());
+
+                                            database.collection("reseps").document(idResep).set(resep)
                                                 .addOnCompleteListener(task -> {
                                                     if(task.isSuccessful()){
-                                                        Toast.makeText(getApplicationContext(), "Data save completed", Toast.LENGTH_SHORT).show();
+                                                        database.collection("users").document(user.getUid()).set(currentUser).addOnSuccessListener(v -> {
+                                                            Toast.makeText(getApplicationContext(), "success save data", Toast.LENGTH_SHORT).show();
+                                                        }).addOnFailureListener(e -> {
+                                                            Toast.makeText(getApplicationContext(), "error message: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                        });
                                                         this.finish();
                                                     }
                                                 }).addOnFailureListener(e -> {
@@ -216,7 +215,6 @@ public class NewMenu extends AppCompatActivity {
                                 this.finish();
                             });
                         } else {
-
                             if(actionStep.equals(MenuAdapter.ACTION_UPDATE)) {
                                 Map<String, Object> dataUpdated = new HashMap<>();
 
@@ -240,7 +238,6 @@ public class NewMenu extends AppCompatActivity {
                                 });
                             } else {
                                 Toast.makeText(getApplicationContext(), "The image source is should'nt empty, please choose some image for continue the proses!", Toast.LENGTH_SHORT).show();
-
                             }
                         }
 
@@ -251,9 +248,10 @@ public class NewMenu extends AppCompatActivity {
                     }
                 /*** end validate */
 
-//            }
+            }
         });
     }
+
 
     public void checkPermission(String permission, int requestCode)
     {
