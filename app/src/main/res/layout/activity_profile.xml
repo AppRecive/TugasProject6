@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,33 +8,40 @@
     android:orientation="vertical"
     android:background="@color/colorBest1"
     tools:context=".Profile">
-    <androidx.appcompat.widget.Toolbar
-        android:background="@color/colorPrimary"
-        app:titleTextColor="@color/white"
+
+    <LinearLayout
+        android:id="@+id/ll_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="List Menu"
-        android:id="@+id/toolbar_profile" />
-
-    <TextView
-        android:id="@+id/txtPrfl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="WELLCOME TO MY PROFILE"
-        android:textStyle="bold"
-        android:background="@drawable/garis"
-        android:textSize="25sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:padding="5sp"
-        android:textColor="@color/colorBest2"/>
-
-
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <androidx.appcompat.widget.Toolbar
+            android:background="@color/colorPrimary"
+            app:titleTextColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:title="Profil"
+            android:id="@+id/toolbar_profile" />
     <ImageView
-        android:id="@+id/imgPrfle"
+        android:src="@drawable/fotoprofil"
+        android:id="@+id/preview_image"
         android:layout_width="match_parent"
-        android:layout_height="568dp"
-        android:src="@drawable/profile" />
+        android:layout_height="300dp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/txtApp1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Nama : Faisal Afif \nNim : 12190259 \nAgama : Islam \nAlamat : jl.Raden Arya Wangsakara kp.Lengkong kyai Pagedangan Bsd Tangerang"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/txtApp2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="APLIKASI RESEP MAKANAN KHAS JAKARTA BERBASIS ANDROID ADALAH SYARAT KELULUSAN DIPLOMA (D3) BAGI FAISAL AFIF \n JURUSAN SISTEM INFORMASI \n FAKULTAS TEKNIK DAN INFORMATIKA \n UNIVERSITAS BINA SARANA INFORMATIKA \n       BERDO'A BERUSAHA DAN PERCAYA" />
+
+    </LinearLayout>
+</ScrollView>
